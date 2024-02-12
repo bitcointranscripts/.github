@@ -1,4 +1,29 @@
-## Bitcoin Transcripts Pipeline
+## Bitcoin Transcripts
+
+The transcription pipeline orchestrates the creation, management, and publication of AI-generated technical transcripts related to Bitcoin.
+
+### Components Overview
+
+- **Curator**: Selects source material and submits the AI-generated transcripts to the central repository.
+- **[tstbtc](https://github.com/bitcointranscripts/tstbtc)**: A command-line tool that processes source material to produce AI-generated transcripts using different transcription services.
+- **[bitcointranscripts](https://github.com/bitcointranscripts/bitcointranscripts)**: The central repository where all transcripts are stored.
+- **[transcription-review-backend](https://github.com/bitcointranscripts/transcription-review-backend)**: Coordinates the review workflow, managing transcript queues, notifications, and reviewer payouts.
+- **[Discord Server](https://discord.gg/kaSKyYhmjH)**: Community engagement including alerts for users about new transcripts available for review.
+- **GitHub**: Central platform for authentication, storage, and tracking submissions as part of the review and evaluation workflow.
+- **[transcription-review-front-end](https://github.com/bitcointranscripts/transcription-review-front-end)**: A user interface for reviewers to manage their review tasks, including transcript editing and submission.
+- **Reviewer**: Community contributors who refine the AI-generated transcripts, ensuring their quality and accuracy.
+- **Evaluator**: Responsible for the final review stage, assessing and approving submissions for merging into the central repository.
+- **[btctranscripts.com](https://github.com/bitcointranscripts/bitcointranscripts.github.io)**: The public-facing website for Bitcoin Transcripts, updated automatically with newly merged content.
+
+### Transcription Pipeline Overview
+
+1. **Creation & Queueing**: Initiated by the Curator, transcripts are generated using tstbtc and committed to the central repository. This triggers a webhook in the transcription-review-backend, queuing the transcript for review and notifying via the Discord Server for its availability.
+2. **Review**: Reviewers use the transcription-review-front-end as an enhanced interface to access and edit transcripts. This front-end is linked to GitHub, where each edit is reflected as changes in a unique branch in the reviewer's fork of the repository. The platform facilitates easy viewing, claiming, and modification of transcripts, with the backend coordinating the review workflow.
+3. **Evaluation**: After editing, reviewers submit their work, creating pull requests to the bitcointranscripts repository. These PRs are then evaluated by an Evaluator who can request further changes or approve and merge the submissions into the main repository.
+4. **Finalization**: Following the approval, the transcription-review-backend processes the payouts for reviewers.
+<br/>
+<details><summary>CLICK for <b>Sequence Diagram of the Transcription Pipeline</b></summary>
+<br/>
 
 ```mermaid
 sequenceDiagram
@@ -95,7 +120,7 @@ sequenceDiagram
     Site->>Site: Rebuild with updated content
 
 ```
-
+</details>
 <!--
 
 **Here are some ideas to get you started:**
