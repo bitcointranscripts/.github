@@ -2,12 +2,23 @@
 
 At Bitcoin Transcripts we are building a largely autonomous transcription workflow that streamlines the AI-generation, review by humans, and publication of bitcoin tech transcripts.
 
-### Transcription Workflow
+<img width="3428" alt="workflow" src="https://github.com/user-attachments/assets/df27b6f8-859d-4b8e-ac3c-bed5ce55b277">
 
-1. **Curation**: Curators propose new content directly in the _bitcointranscripts_ repository. They submit PRs to add files representing individual items or sources for transcription, forming the Transcription Backlog.
-2. **Generation & Queueing**: The _tstbtc_ transcription server processes sources from the Transcription Backlog and submits the AI-generated output back to the _bitcointranscripts_ repository. This triggers a webhook in the _transcription-review-backend_, queuing the transcript for review and notifying via the Discord Server for its availability. Concurrently, transcription metadata are archived in the _bitcointranscripts-metadata_ repository.
-3. **Review**: Reviewers use the _transcription-review-front-end_ as an enhanced interface to access and edit transcripts. This front-end is linked to GitHub, where each edit is reflected as changes in a unique branch in the reviewer's fork of the repository. The platform facilitates easy viewing, claiming, and modification of transcripts, with the backend coordinating the review workflow.
-4. **Evaluation**: After editing, reviewers submit their work, creating pull requests to the _bitcointranscripts_ repository. These PRs are then evaluated by an _Evaluator_ who can request further changes or approve and merge the submissions into the main repository.
+### Transcription Workflow (Summary)
+
+1. **Curator** adds sources and resources to the **Transcription Backlog**.
+2. Resources from the backlog are sent to the **AI Transcription Service** for processing.
+3. **AI-generated transcripts** are published on the **Registry** and also added to the **Review Queue**.
+4. **Reviewers** claim and edit transcripts from the **Review Queue** and submit them for approval.
+5. **Evaluators** review and approve finalized transcripts.
+6. **Approved transcripts** are updated on the **Registry** as final versions, and **Reviewers receive a payout** for their work.
+
+### Transcription Workflow (Detailed)
+
+1. **Curation**: Curators propose new content by submitting PRs directly in the _bitcointranscripts_ repository. This forms the Transcription Backlog, a collection of all the content that needs transcription, including specific sources like podcasts or individual resources like conference talks and YouTube videos.
+2. **Generation & Queueing**: The _tstbtc_ transcription server processes sources from the Transcription Backlog and submits the AI-generated output back to the _bitcointranscripts_ repository. This triggers a webhook in the _transcription-review-backend_, queuing the transcript for review and notifying via the Discord Server for its availability. Simultaneously, the transcription metadata are archived in the _bitcointranscripts-metadata_ repository.
+3. **Review**: Reviewers access the _transcription-review-front-end_, an enhanced interface designed to streamline the transcript editing process. This interface is integrated with GitHub, allowing each edit to be tracked as changes in a unique branch of the reviewer's fork of the repository. The platform facilitates easy viewing, claiming, and modification of transcripts, with the backend coordinating the review workflow.
+4. **Evaluation**: After editing, reviewers submit their finalized transcripts, creating PRs to the _bitcointranscripts_ repository. These PRs are then evaluated by an _Evaluator_. The Evaluator may request further revisions or approve the submission. Approved transcripts are merged into the main repository, marking the end of the review process.
 5. **Payout**: Following the approval, the _transcription-review-backend_ processes the payouts for reviewers.
 6. **Publication**: Approved transcripts are merged into the main _bitcointranscripts_ repository, automatically updating _btctranscripts.com_.
 
@@ -23,7 +34,7 @@ At Bitcoin Transcripts we are building a largely autonomous transcription workfl
 - **GitHub**: Central platform for authentication, storage, and tracking submissions as part of the review and evaluation workflow.
 - **Reviewer**: Community contributors who refine the AI-generated transcripts, ensuring their quality and accuracy.
 - **Evaluator**: Responsible for the final review stage, assessing and approving submissions for merging.
-- **[btctranscripts.com](https://github.com/bitcointranscripts/bitcointranscripts.github.io)**: The public-facing website for Bitcoin Transcripts, updated automatically with newly merged content.
+- **[Registry](https://github.com/bitcointranscripts/bitcointranscripts.github.io)**: The public-facing website for Bitcoin Transcripts, updated automatically with newly merged content.
 
 <br/>
 <details><summary>CLICK for <b>Sequence Diagram of the Transcription Pipeline</b></summary>
